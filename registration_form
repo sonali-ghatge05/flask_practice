@@ -1,0 +1,21 @@
+from flask import Flask, request, render_template
+
+app = Flask(__name__)
+
+@app.route("/register-form")
+def form():
+    return render_template("form.html")
+
+@app.route("/register-result", methods=["POST"])
+def register_form():
+    Name = request.form["Name"]
+    Age = int(request.form["Age"])
+    Email = request.form["Email"]
+
+    if Age >= 18 :
+        return f"Name:{Name}, Age: {Age}, Email: {Email}"
+    else:
+        return "sorry, you must be 18!"
+        
+if __name__ == "__main__":
+    app.run(debug=True)
